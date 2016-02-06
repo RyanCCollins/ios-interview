@@ -88,14 +88,16 @@ The approach suggested in Question #5 makes sense and I will explain why. Howeve
 
 If part of the requirement is to use `NSUserDefaults`, I would consider using the `NSUserDefaults.sharedUserDefaults` method because it is a singleton that automatically synchronizes the persisted data with the in memory properties.  That way, any time I needed to use the data in a separate view controller, I could do so by accessing the `NSUserDefaults.standardUserDefaults` properties.
 
-The alternative that I would suggest would be to refactor the code because it does not follow the *Model View Controller* paradigm.  Why not create a seperate model class for the *Actor*?  The class could be accessed through a singleton and the methods for reading and writing the data to `NSUserDefaults` or, even better, `CoreData` could happen within the singleton.  Since this is a small project, perhaps the slower `NSUserDefaults` would make due. That said, I would suggest using CoreData in case the project were to grow and because storing image data to `NSUserDefaults` would be slow.
+The alternative that I would suggest would be to refactor the code because it does not follow the *Model View Controller* paradigm.  Why not create a seperate model class for the *Actor*?  The class could be accessed through a singleton and the methods for reading and writing the data to `NSUserDefaults` could happen within the singleton.  
+
+Going one step further, we could use CoreData instead of NSUserDefaults.  It would be a better idea to use CoreData in case the project was to grow and because storing image data to `NSUserDefaults` would be computationally slow.
 
 Below is a bit of psuedocode showing how the singleton class would be structured.
 
 ```
 // Note: this shows NSUserDefaults because that is what the question suggests we use.
 // That said, I might take a different approach and use an NSManagedObject because NSUserDefaults is not meant to
-// Store much more than settings.  Storing an image can be done, but it is slow.  I included psuedocode for storing to //NSUSerDefaults because it was part of the question.
+// Store much more than settings.  Storing an image can be done, but it is slow.  I included psuedocode for storing to //NSUSerDefaults to fulfill the requirements asked in this question.
 class Actor: NSObject {
     var actorBio: String
     var actorName: String
