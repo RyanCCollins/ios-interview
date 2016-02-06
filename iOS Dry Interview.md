@@ -32,7 +32,7 @@ The Model classes are responsible for downloading data from the Twitter API, sto
 | CoreDataStackManager  | N/A            |
 
 ### View
-For custom views, there is a custom table view cell for showing the detail of each tweet in the feed.  To customize the UI, there is a *Like* button for liking a tweet, a Twitter login button and custom views for the settings and login views. There are also other various custom UI elements, such as the action buttons within each tweet cell in the feed.
+For custom views, there is a custom tableview cell for showing the detail of each tweet in the feed.  To customize the UI, there is a *Like* button for liking a tweet, a Twitter login button and custom views for the settings and login views. There are also other various custom UI elements, such as the action buttons within each tweet cell in the feed.
 
 |  Class       | Inherits From  |
 |--------------|----------------|
@@ -75,13 +75,13 @@ This is a great question.  Developers often forget to think about one of the mos
 
 First of all, Apple Engineers have put a lot of time and effort into creating a user interface library with fantastic performance.  Their method for dequeuing reusable cells is a fantastic approach.  The basic idea here is that instead of performing complex operations to create a new cell every time we need one, we simply recycle cells and other table components when they are no longer in view, update the state of the view elements with new data and reuse it. 
 
-Apple's delegate pattern comes into focus here.  By utilizing the `UITableViewDelegate/Datasource` methods in an intelligent manner, we can harness the power and optimization that thousands of Apple employees have spent countless hours creating.  For example, instead of binding data to the entire table view, we use the `tableView:willDisplayCell:forRowAtIndexPath` method to compute changes to the data in each cell.  
+Apple's delegate pattern comes into focus here.  By utilizing the `UITableViewDelegate/Datasource` methods in an intelligent manner, we can harness the power and optimization that thousands of Apple employees have spent countless hours creating.  For example, instead of binding data to the entire tableview, we use the `tableView:willDisplayCell:forRowAtIndexPath` method to compute changes to the data in each cell.  
 
-We have to be smart when using these delegate and datasource methods, because the performance of the table view depends on them.  Although the reuse pattern is fantastic, it can be costly if you perform heavy calculations from within the delegate and datasource methods.  Complex data operations need to happen on background threads.  It is also best to keep the tableview simple as far as the dimensions are concerned because the calculations for `heightForRowAtIndexPath:` and other related methods are done on each pass when new table view cells are created. 
+We have to be smart when using these delegate and datasource methods, because the performance of the tableview depends on them.  Although the reuse pattern is fantastic, it can be costly if you perform heavy calculations from within the delegate and datasource methods.  Complex data operations need to happen on background threads.  It is also best to keep the tableview simple as far as the dimensions are concerned because the calculations for `heightForRowAtIndexPath:` and other related methods are done on each pass when new tableview cells are created. 
 
 I would also want to use the least computationally expensive graphics operations when considering the view drawing life cycle for any custom views rendered within the tableview cell.  This would mean avoiding heavy animations using Apple's Core Animation framework.  Instead, we can perform our view rendering with the CoreGraphics `drawRect` method.  The `drawRect` method is responsible for rendering custom static content via the CPU.  As I understand it, this frees up the GPU to handle the more complex operations that UIKit is performing for us.
 
-To test that my theories are sound, I would use the Apple Instruments application to measure the speed at which our table view cells were being rendered and I would tweak it until I got it above 60 FPS.
+To test that my theories are sound, I would use the Apple Instruments application to measure the speed at which our tableview cells were being rendered and I would tweak it until I got it above 60 FPS.
 
 ### __Question 5__
 The approach suggested in Question #5 makes sense and I will explain why. However, I will also suggest an alternative approach.  
