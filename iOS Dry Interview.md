@@ -139,6 +139,12 @@ If I were to start my iOS Developer position today, my goals a year from now wou
 
 Also, my goal would be to have a library of all of the reusable components that I use for my development so that I would be even more efficient than I am now.  I would combine the best of my code, along with the best of the Apple frameworks into a reusable library that would grow with me.
 
+
+iOS Job Posting
+Although this is not just for an iOS Job, it is right up my alley as a Senior Backend Developer with iOS experience.
+
+Here is a [link to the posting](https://www.linkedin.com/jobs2/view/100462805?trkInfo=searchKeywordString%3AIos+Developer%2CsearchLocationString%3A%2C+Connecticut%2Cvertical%3Ajobs%2CpageNum%3A1%2Cposition%3A14%2CMSRPsearchId%3A453673677_1454734448332&recommendedFlavor=SCHOOL_RECRUIT&trk=jobs_jserp_job_listing_text).
+
 ### Questions
 Question 1 - What have you learned recently about iOS development? How did you learn it? Has it changed your approach to building apps?
 
