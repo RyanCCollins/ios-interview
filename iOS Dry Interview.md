@@ -75,18 +75,18 @@ This is a great question.  Developers often forget to think about one of the mos
 
 First of all, Apple Engineers have put a lot of time and effort into creating a user interface library with fantastic performance.  Their method for dequeuing reusable cells is a fantastic approach.  The basic idea here is that instead of performing complex operations to create a new cell every time we need one, we simply recycle cells and other table components when they are no longer in view, update the state of the view elements with new data and reuse it. 
 
-Apple's delegate pattern comes into focus here.  By utilizing the `UITableViewDelegate/Datasource` methods in an intelligent manner, we can harness the power and optimization that thousands of Apple employees have spent countless hours creating.  For example, instead of binding data to the entire table view, we use the `tableView:willDisplayCell:forRowAtIndexPath` method to compute changes to our the data in each cell.  
+Apple's delegate pattern comes into focus here.  By utilizing the `UITableViewDelegate/Datasource` methods in an intelligent manner, we can harness the power and optimization that thousands of Apple employees have spent countless hours creating.  For example, instead of binding data to the entire table view, we use the `tableView:willDisplayCell:forRowAtIndexPath` method to compute changes to the data in each cell.  
 
 We have to be smart when using these delegate and datasource methods, because the performance of the table view depends on them.  Although the reuse pattern is fantastic, it can be costly if you perform heavy calculations from within the delegate and datasource methods.  Complex data operations need to happen on background threads.  It is also best to keep the tableview simple as far as the dimensions are concerned because the calculations for `heightForRowAtIndexPath:` and other related methods are done on each pass when new table view cells are created. 
 
 I would also want to use the least computationally expensive graphics operations when considering the view drawing life cycle for any custom views rendered within the tableview cell.  This would mean avoiding heavy animations using Apple's Core Animation framework.  Instead, we can perform our view rendering with the CoreGraphics `drawRect` method.  The `drawRect` method is responsible for rendering custom static content via the CPU.  As I understand it, this frees up the GPU to handle the more complex operations that UIKit is performing for us.
 
-To test that my theories are sound, I would use the Apple Instruments application to measure the speed at which our table view cells were rendering and I would tweak it until I got it above 60 FPS.
+To test that my theories are sound, I would use the Apple Instruments application to measure the speed at which our table view cells were being rendered and I would tweak it until I got it above 60 FPS.
 
 ### __Question 5__:
-If I were given this project, I would consider a few separate approaches.  If part of the requirement was to use NSUserDefaults, I would consider using the `NSUserDefaults.sharedUserDefaults` method because it is a singleton that automatically synchronizes the persisted data with the in memory properties.  That way, any time I need to use the data in a separate view controller, I could access any of the persisted properties in any view by just accessing the NSUserDefaults.standardUserDefaults properties.
+If I were given this project, I would consider a few separate approaches.  If part of the requirement was to use `NSUserDefaults`, I would consider using the `NSUserDefaults.sharedUserDefaults` method because it is a singleton that automatically synchronizes the persisted data with the in memory properties.  That way, any time I need to use the data in a separate view controller, I could access any of the persisted properties in any view by just accessing the `NSUserDefaults.standardUserDefaults` properties.
 
-That said, I would probably suggest a different approach. I would definitely refactor it because it does not follow the *Model View Controller* paradigm.  Why not create a seperate model class for the *Actor*?  The class could be accessed through a singleton and the methods for reading and writing the data to NSUserDefaults could happen within the singleton.
+That said, I would probably suggest a different approach. I would definitely refactor it because it does not follow the *Model View Controller* paradigm.  Why not create a seperate model class for the *Actor*?  The class could be accessed through a singleton and the methods for reading and writing the data to `NSUserDefaults` could happen within the singleton.
 
 Below is a bit of psuedocode for how this could be done.
 
@@ -108,7 +108,7 @@ class Actor: NSObject {
     
     
     func saveActor (actorBio: String, ...){
-		 // Save our actor object to the NSUserDefaults.
+	// Save our actor object to the NSUserDefaults.
         // and set our properties to be accessed through the Singleton
     }
 
@@ -122,7 +122,7 @@ Actor.sharedInstance().saveActor(actorBio: ...)
 ```
 
 __Question 6__:
-If someone I was working with gave me a file for a ViewController that contained code for fetching and storing data from a network to the local device, I would likely recommend that they take the Udacity iOS Developer Nanodegree and I would help them to understand what they could do to improve their code.
+If someone I was working with gave me a file for a ViewController that contained code for fetching and storing data from a network to the local device, I would recommend that they take the Udacity iOS Developer Nanodegree and I would help them to understand what they could do to improve their code.
 
 For starters, I would refactor the code into separate classes.  I would create a model class for storing the data to a persistent store.  I would also create a separate `GithubAPI` model class that handled the network requests and data parsing.  By the time I was done, the code would be very well abstracted to abide by the *Model View Controller* paradigm, making the code much more reusable, decoupled and easier to test and debug.
 
@@ -131,7 +131,7 @@ I created a bit of pseudocode that I saved in the `GitHubProjectViewController.s
 __Question 7__:
 If I were to start my iOS Developer position today, my goals a year from now would be to have an even better grasp on the Swift and Objective-C languages and the Apple Frameworks.  I plan to spend the rest of my life mastering software development and I believe that the education process is a lifelong pursuit.  I would constantly be reading and talking to other developers to learn their techniques to apply best practices to all of my work.
 
-Also, my goal would be to have a library of all of the reusable components that I use for my development so that I could be incredibly efficient.  I would combine the best of my code, along with the best of the Apple frameworks into a reusable library that would grow with me.
+Also, my goal would be to have a library of all of the reusable components that I use for my development so that I would be even more efficient than I am now.  I would combine the best of my code, along with the best of the Apple frameworks into a reusable library that would grow with me.
 
 ### Questions
 Question 1 - What have you learned recently about iOS development? How did you learn it? Has it changed your approach to building apps?
