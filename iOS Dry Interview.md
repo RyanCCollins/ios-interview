@@ -1,7 +1,7 @@
 ### iOS Dry Interview
 
 ### __Question 1__:
-I have recently mastered the use of many of the more advanced features the Swift programming language.
+I have recently mastered the use of many of the more advanced features of the Swift programming language.
 
 I find that having an understanding of the more advanced language features of Swift is extremely powerful.  As a Swift Developer, you can essentially tailor the programming language to suit your needs by using such design patterns as class extensions, delegation, protocols, typealises, et. al.  This lets you focus on building your own reusable code that can be used for all of your work.
 
