@@ -3,9 +3,9 @@
 ### __Question 1__
 I have recently mastered the use of many of the more advanced features of the Swift programming language.
 
-I find that having an understanding of the more advanced language features of Swift is extremely powerful.  As a Swift Developer, you can essentially tailor the programming language to suit your needs by using such design patterns as class extensions, delegation, protocols, typealises, et. al.  This lets you focus on building your own reusable code that can be used for all of your work.
+I find that having an understanding of the more advanced language features of Swift is extremely powerful.  As a Swift developer, you can essentially tailor the programming language to suit your needs by using such design patterns as class extensions, delegation, protocols, typealises, et. al.  This lets you focus on building your own reusable code that can be used for all of your work.
 
-I use a great dependency manager called Cocoapods that lets me package up my components into reusable modules that I can load into any project, making me a more efficient developer.  Mastering the intricacies of the Swift programming language has changed the way that I build software for the better.
+I use a great dependency manager called Cocoapods that lets me package up my components into reusable modules that I can load into any project, making me a more efficient developer.  Mastering the intricacies of the Swift programming language has changed for the better the way that I build software.
 
 Another thing that I have learned within the past year is how to apply best practices to my work.  Learning how to apply the industry level best standards to all of my worked has help me to be a better developer and has prepared me to apply my knowledge to solve complex issues in a team environment.  One such example is how I document my work and how I use Git for my iOS and web development.  I now use Git to its full advantage by writing incredibly detailed commit messages, committing often and early, rebasing / squashing my commits, etc. All of this not only helps me to create better software, but it also benefits the people I work with.
 
