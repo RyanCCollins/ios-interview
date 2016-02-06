@@ -132,7 +132,7 @@ If someone I was working with gave me a file for a ViewController that contained
 
 For starters, I would refactor the code into separate classes.  I would create a model class for storing the data to a persistent store.  I would also create a separate `GithubAPI` model class that handled the network requests and data parsing.  By the time I was done, the code would be very well abstracted to abide by the *Model View Controller* paradigm, making the code much more reusable, decoupled and easier to test and debug.
 
-I created a bit of pseudocode that I saved in the `GitHubProjectViewController.swift` file.
+I created a bit of pseudocode that I saved in the `GitHubProjectViewController.swift` file to demonstrate this.
 
 __Question 7__:
 If I were to start my iOS Developer position today, my goals a year from now would be to have an even better grasp on the Swift and Objective-C languages and the Apple Frameworks.  I plan to spend the rest of my life mastering software development and I believe that the education process is a lifelong pursuit.  I would constantly be reading and talking to other developers to learn their techniques to apply best practices to all of my work.
@@ -159,5 +159,3 @@ Before answering the final question, insert a job description for an iOS develop
 Your answer for Question 7 should be targeted to the company/job-description you chose.
 
 Question 7 - If you were to start your iOS developer position today, what would be your goals a year from now?
-
-
