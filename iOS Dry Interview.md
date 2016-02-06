@@ -14,7 +14,7 @@ Most recently, I used the CoreData and Realm data persistence frameworks.  I lea
 
 What I do like about CoreData is how powerful it is.  I like it because it has an incredibly powerful API for large-scale desktop and mobile applications. That said, I dislike the fact that the power comes at a large cost.  The learning curve is high and even a full understanding of the CoreData Stack and the thread safety precautions that must be taken is not always enough to build perfect software.  I realize the power of CoreData, but I think that there are better solutions for many mobile applications.
 
-I really like the Realm persistence framework because it was built specifically for the mobile platform.  You can run your persistence model classes on multiple threads without fear of bad access or data corruption (and the obscure CoreData bugs that only NSZombies will help you to track down.)  I plan to use both frameworks when appropriate, but am very interested in using Realm for smaller applications.
+I really like the Realm persistence framework because it was built specifically for the mobile platform.  You can run your persistence logic on multiple threads without fear of bad access or data corruption (and the obscure CoreData bugs that only NSZombies will help you to track down.)  I plan to use both frameworks when appropriate, but am very interested in using Realm for smaller applications.
 
 ### __Question 3__
 I believe that the first step to writing good software is to break down the requirements and specifications in a highly detailed manner.  Once the specifications are mapped out, I would structure the application's data structs and classes following the *Model View Controller* paradigm. An example architecture is shown below.
