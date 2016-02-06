@@ -75,11 +75,11 @@ This is a great question.  Developers often forget to think about one of the mos
 
 First of all, Apple Engineers have put a lot of time and effort into creating a user interface library with fantastic performance.  Their method for dequeuing reusable cells is a fantastic approach.  The basic idea here is that instead of performing complex operations to create a new cell every time we need one, we simply recycle cells and other table components when they are no longer in view, update the state of the view elements with new data and reuse it. 
 
-Apple's delegate pattern comes into focus here.  By utilizing the `UITableViewDelegate/Datasource` methods in an intelligent manner, we can harness the power and optimization that thousands of Apple employees have spent countless hours creating.  For example, instead of binding data to the entire tableview, we use the `tableView:willDisplayCell:forRowAtIndexPath` method to compute changes to the data in each cell.  
+Apple's delegate pattern comes into focus here.  By utilizing the `UITableViewDelegate/Datasource` methods in an intelligent manner, we can harness the power and optimization that thousands of Apple employees have spent countless hours perfecting.  For example, instead of binding data to the entire tableview and all of the cells, we use the `tableView:willDisplayCell:forRowAtIndexPath` method to compute only the changes to the data in each cell when that cell is about to display.  
 
-We have to be smart when using these delegate and datasource methods, because the performance of the tableview depends on them.  Although the reuse pattern is fantastic, it can be costly if you perform heavy calculations from within the delegate and datasource methods.  Complex data operations need to happen on background threads.  It is also best to keep the tableview simple as far as the dimensions are concerned because the calculations for `heightForRowAtIndexPath:` and other related methods are done on each pass when new tableview cells are created. 
+We have to be smart when using these delegate and datasource methods, because the performance of the tableview depends on them.  Although the reuse pattern is fantastic, it can be costly if you perform heavy calculations from within the delegate and datasource methods.  Complex data operations need to happen on background dispatch queues.  It is also best to keep the tableview simple as far as the dimensions are concerned because the calculations for `heightForRowAtIndexPath:` and other related methods are done on each pass when new tableview cells are created. 
 
-I would also want to use the least computationally expensive graphics operations when considering the view drawing life cycle for any custom views rendered within the tableview cell.  This would mean avoiding heavy animations using Apple's Core Animation framework.  Instead, we can perform our view rendering with the CoreGraphics `drawRect` method.  The `drawRect` method is responsible for rendering custom static content via the CPU.  As I understand it, this frees up the GPU to handle the more complex operations that UIKit is performing for us.
+I would also want to use the least computationally expensive graphics operations when considering the view drawing lifecycle for any custom views rendered within the tableview cell.  This would mean avoiding heavy animations using Apple's CoreAnimation framework.  Instead, we can perform our view rendering with the CoreGraphics `drawRect` method.  The `drawRect` method is responsible for rendering custom static content via the CPU.  As I understand it, this frees up the GPU to handle the more complex graphical computations that UIKit is performing.
 
 To test that my theories are sound, I would use the Apple Instruments application to measure the speed at which our tableview cells were being rendered and I would tweak it until I got it above 60 FPS.
 
@@ -97,7 +97,8 @@ Below is a bit of psuedocode showing how the singleton class would be structured
 ```
 // Note: this shows NSUserDefaults because that is what the question suggests we use.
 // That said, I might take a different approach and use an NSManagedObject because NSUserDefaults is not meant to
-// Store much more than settings.  Storing an image can be done, but it is slow.  I included psuedocode for storing to //NSUSerDefaults to fulfill the requirements asked in this question.
+// Store much more than settings.  Storing an image can be done, but it is slow.  I included psuedocode for storing to 
+// NSUSerDefaults to fulfill the requirements asked in this question.
 class Actor: NSObject {
     var actorBio: String
     var actorName: String
@@ -120,7 +121,7 @@ class Actor: NSObject {
 
 }
 
-// New we can access the properties via the 
+// Now we can access the properties via the 
 actorNameLabel.text = Actor.sharedInstance().actorName
 
 // And save a new Actor like so
@@ -144,6 +145,8 @@ Also, my goal would be to have a library of all of the reusable components that 
 Although this is not just for an iOS Job, it is right up my alley as a Senior Backend Developer with iOS experience.
 
 Here is a [link to the posting](https://www.linkedin.com/jobs2/view/100462805?trkInfo=searchKeywordString%3AIos+Developer%2CsearchLocationString%3A%2C+Connecticut%2Cvertical%3Ajobs%2CpageNum%3A1%2Cposition%3A14%2CMSRPsearchId%3A453673677_1454734448332&recommendedFlavor=SCHOOL_RECRUIT&trk=jobs_jserp_job_listing_text).
+
+Alternatively, I would consider applying for an [entry level job](https://jobs.lever.co/udacity/b99fa8fc-9da9-4541-a627-f92e17dbdcdb) at an amazing company like Udacity.
 
 ### Questions Asked
 Question 1 - What have you learned recently about iOS development? How did you learn it? Has it changed your approach to building apps?
