@@ -10,14 +10,14 @@ I use a great dependency manager called Cocoapods that lets me package up my com
 Another thing that I have learned within the past year is how to apply best practices to my work.  This has taught me to be a better developer and has prepared me to apply my knowledge to solve complex issues in a team environment.  One such example is how I document my work and how I use Git for my iOS and web development.  I now use Git to its full advantage by writing incredibly detailed commit messages, committing often and early, rebasing / squashing my commits, etc. All of this not only helps me to create better software, but it also benefits the people I work with.
 
 ### __Question 2__
-Most recently, I used the CoreData and Realm data persistence frameworks.  I learned to use them the same way that I learn to use anything; by reading the documentation and by practicing using the API in sample applications.  
+Most recently, I used the CoreData and Realm data persistence frameworks.  I learned to use them the same way that I learn to use anything, by reading the documentation and by practicing using the API in sample applications.  
 
 What I do like about CoreData is how powerful it is.  I like it because it has an incredibly powerful API for large-scale desktop and mobile applications. That said, I dislike the fact that the power comes at a large cost.  The learning curve is high and even a full understanding of the CoreData Stack and the thread safety precautions that must be taken is not always enough to build perfect software.  I realize the power of CoreData, but I think that there are better solutions for many mobile applications.
 
 I really like the Realm persistence framework because it was built specifically for the mobile platform.  You can run your persistence model classes on multiple threads without fear of bad access or data corruption (and the obscure CoreData bugs that only NSZombies will help you to track down.)  I plan to use both frameworks when appropriate, but am very interested in using Realm for smaller applications.
 
 ### __Question 3__
-I believe that the first step to writing good software is to breakdown the requirements and specifications in a highly detailed manner.  Once I had the specifications mapped out, I would then want to structure the application's data structures and classes following the "Model View Controller" paradigm. An example architecture is shown below.
+I believe that the first step to writing good software is to break down the requirements and specifications in a highly detailed manner.  Once the specifications are mapped out, I would then want to structure the application's data structs and classes following the **Model View Controller** paradigm. An example architecture is shown below.
 
 ### Model
 The Model classes are responsible for downloading data from the Twitter API, storing tweets, account and organization data, and persisting the data using CoreData.  There is a CoreDataStackManager class for all CoreData operations and also an ImageCache class for caching any images downloaded.
@@ -32,7 +32,7 @@ The Model classes are responsible for downloading data from the Twitter API, sto
 | CoreDataStackManager  | N/A            |
 
 ### View
-For custom views, there is a custom table view cell for showing the detail of each tweet in the feed.  To customize the UI, there is a "like" button for liking a tweet, a Twitter login button and custom views for the settings and login views. There are also other various custom UI elements, such as the action buttons within each tweet cell in the feed.
+For custom views, there is a custom table view cell for showing the detail of each tweet in the feed.  To customize the UI, there is a **like** button for liking a tweet, a Twitter login button and custom views for the settings and login views. There are also other various custom UI elements, such as the action buttons within each tweet cell in the feed.
 
 |  Class       | Parent Class   |
 |--------------|----------------|
