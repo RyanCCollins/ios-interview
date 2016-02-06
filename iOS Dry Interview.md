@@ -86,11 +86,11 @@ To test that my theories are sound, I would use the Apple Instruments applicatio
 ### __Question 5__
 The approach suggested in Question #5 does not make sense to me and I will explain why. I will also suggest an alternative approach.  
 
-NSUserDefaults is not a smart solution for saving data within an application because it is computationally slow and there are far better solutions for persisting data on the iOS mobile platform.
+NSUserDefaults is not a smart solution for persisting any data other than settings for many reasons and there are far better solutions for persisting data on the iOS mobile platform.
 
-The alternative that I would suggest would be to refactor the code to use Core Data and also to follow the *Model View Controller* paradigm.  Why not create a seperate NSManagedObject model class for the *Actor*?  The class could be accessed through the the `fetchedResultsController` from within any ViewController and we could save data using the `managedObjectContext` singleton of the `CoreDataStackManager`.  
+The alternative that I would suggest would be to refactor the code to use CoreData and also to follow the *Model View Controller* paradigm.  Why not create a separate NSManagedObject model class for the *Actor*?  The class could be accessed through the `fetchedResultsController` from within any ViewController and we could save data using the `managedObjectContext` singleton of the `CoreDataStackManager`.  
 
-Below is a bit of psuedocode showing how the singleton class would be structured.
+Below is a bit of pseudo-code showing how the model class would be structured.
 
 ```
 // Our NSManagedObject Actor Class
@@ -192,14 +192,14 @@ If someone I was working with gave me a file for a ViewController that contained
 
 For starters, I would refactor the code into separate classes.  I would create a model class for storing the data to a persistent store.  I would also create a separate `GithubAPI` model class that handled the network requests and data parsing.  By the time I was done, the code would be very well abstracted to abide by the *Model View Controller* paradigm, making the code much more reusable, decoupled and easier to test and debug.
 
-I created a bit of pseudocode that I saved in the `GitHubProjectViewController.swift` file to demonstrate this.
+I created a bit of pseudo-code that I saved in the `GitHubProjectViewController.swift` file to demonstrate this.
 
 ### __Question 7__:
-I plan to spend the rest of my life mastering software development and I believe that the education process is a lifelong pursuit.  My goals one year from now will likely be the same as they are now.  I will continue to educate myself in new technology, learn new skills and best practices and apply those new skills to everything that I do.  Although it is not necesarilly my goal to work specifically as an iOS developer, I believe that the skills that I have learned during the iOS Developer Nanodegree are completely transferable to all of my work.
+I plan to spend the rest of my life mastering the software development process and I believe that the education process is a lifelong pursuit.  My goals one year from now will likely be the same as they are now.  I will continue to educate myself in new technology, learn new skills and best practices and apply those new skills to everything that I do.  Although it is not necessarily my goal to work specifically as an iOS developer, I believe that the skills that I have learned during the iOS Developer Nanodegree are completely transferable to all of my present and future work.
 
-I would like to work in a mid to senior level position with leadership roles at a company that is working on the bleeding edge of technology.  The reason that I wanted to focus on learning iOS Development was to improve the way that I build software and to improve the way that I communicate with my team.  Having a better understanding of how to build mobile applications makes me a very strong candidate for senior level software developer positions because it has given me a more well-rounded understanding of the software development process and also has helped me to learn best practices for creating software specifications and for performing expert reviews of software/code.  
+I would like to work in a mid to senior level position with leadership roles at a company that is working on the bleeding edge of technology.  The reason that I wanted to focus on learning iOS Development was to improve the way that I build software and to improve the way that I communicate within a team of software developers.  Having a better understanding of how to build mobile applications makes me a very strong candidate for the positions I am interested in because it has given me a more well-rounded understanding of the software development process and also has helped me to learn best practices for creating software specifications and for performing expert reviews of software/code.  
 
-Not only that, but it has taught me best practices for creating software, working in a team and it has also taught me how to be a mentor.  I spend a lot of my time helping other people to learn how to work as part of a software team.  One of my extracarlicural activites is to organize a team of software developers to work together collaboratively to build software for non profit organizations.  We work together for the sake of solving problems and to gain experience.  An example of this is a project we are working on now that will be used by an organization that coordinates food donations in the city of Portland.
+Not only that, but it has taught me best practices for working in a team and it has also taught me how to be a mentor.  I spend a lot of my time helping other people to learn how to work as part of a software team.  One of my extracurricular activities is to organize a team of software developers to work together collaboratively to build software for non-profit organizations.  We work together for the sake of solving problems and to gain experience.  An example of this is a project we are working on now that will be used by an organization that coordinates food donations in the city of Portland.
 
 After finishing the iOS Developer Nanodegree, I now have an incredible understanding of the entire software development process.  I can take part in the process from every angle and can help the company I work for to drive their business decisions. In summation, I believe that I will continue to grow my knowledge for the rest of my life and I am very excited to take the next step forwards in my career.
 
@@ -208,6 +208,21 @@ As I have stated, my goal is not specifically to work as an iOS Developer.  I co
 
 As I stated, Udacity is one place that I would love to work.  I think that their vision is incredible and I am so excited by their work.
 [Here is a link to a job posting](https://jobs.lever.co/udacity/df7fbc8c-c7c9-4cb3-b1de-7d169521da15) that I may consider.
+
+Here are the responsibilities laid out in the posting.
+
+RESPONSIBILITIES
+
+Building out a classroom framework that lets our students switch between hundreds of videos, quizzes, and programming environments without ever reloading the page
+Rolling out a new style framework for our whole site
+Versatile ways to grade student submissions, including everything from simple answers to large, multi-file projects and exams that adjust their difficulty to students’ performance
+Find ways to incorporate the best new technologies into our stack, and the bulk of the work we do revolves around building new features (rather than iterating on old ones)
+WHAT WE’RE LOOKING FOR
+
+Experience with object-oriented design
+Knowledge, or willingness and ability to become fluent in Python, Functional JavaScript, and client-side MVC
+Opinions about the right way to do things that you aren’t afraid to defend
+User-centric mentality/passionate about building products with great user experience
 ### Questions Asked
 Question 1 - What have you learned recently about iOS development? How did you learn it? Has it changed your approach to building apps?
 
@@ -228,3 +243,4 @@ Before answering the final question, insert a job description for an iOS develop
 Your answer for Question 7 should be targeted to the company/job-description you chose.
 
 Question 7 - If you were to start your iOS developer position today, what would be your goals a year from now?
+
