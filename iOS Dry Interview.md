@@ -1,26 +1,26 @@
-### iOS Dry Interview
+### iOS Interview Dry Run
 
-### __Question 1__:
+### __Question 1__
 I have recently mastered the use of many of the more advanced features of the Swift programming language.
 
 I find that having an understanding of the more advanced language features of Swift is extremely powerful.  As a Swift Developer, you can essentially tailor the programming language to suit your needs by using such design patterns as class extensions, delegation, protocols, typealises, et. al.  This lets you focus on building your own reusable code that can be used for all of your work.
 
 I use a great dependency manager called Cocoapods that lets me package up my components into reusable modules that I can load into any project, making me a more efficient developer.  Mastering the intricacies of the Swift programming language has changed the way that I build software for the better.
 
-Another thing that I have learned within the past year is how to apply best practices to my work.  Learning how to apply the industry level best standards to all of my worked has help me to be a better developer and has prepared me to apply my knowledge to solve complex issues in a team environment.  One such example is how I document my work and how I use Git for my iOS and web development.  I now use Git to its full advantage by writing incredibly detailed commit messages, commiting often and early, rebasing / squashing my commits, etc. All of this not only helps me to create better software, but it also benefits the people I work with.
+Another thing that I have learned within the past year is how to apply best practices to my work.  Learning how to apply the industry level best standards to all of my worked has help me to be a better developer and has prepared me to apply my knowledge to solve complex issues in a team environment.  One such example is how I document my work and how I use Git for my iOS and web development.  I now use Git to its full advantage by writing incredibly detailed commit messages, committing often and early, rebasing / squashing my commits, etc. All of this not only helps me to create better software, but it also benefits the people I work with.
 
-### __Question 2__:
+### __Question 2__
 Most recently, I used the Core Data and Realm data persistence frameworks.  I learned to use them the same way that I learn to use anything; by reading the documentation and by practicing using the API in sample applications.  
 
 What I do like about Core Data is how powerful it is.  I like it because it has an incredibly powerful API for large-scale desktop and mobile applications. That said, I dislike the fact that the power comes at a large cost.  The learning curve is high and even a full understanding of the Core Data Stack and the thread safety precautions that must be taken is not always enough to build perfect software.  I realize the power of Core Data, but I think that there are better solutions for many mobile applications.
 
 I really like the Realm persistence framework because it was built specifically for the mobile platform.  You can run your persistence model classes on multiple threads without fear of bad access or data corruption (and the obscure Core Data bugs that only NSZombies will help you to track down.)  I plan to use both frameworks when appropriate, but am very interested in using Realm for smaller applications.
 
-### __Question 3__:
+### __Question 3__
 I believe that the first step to writing good software is to breakdown the requirements and specifications in a highly detailed manner.  Once I had the specifications mapped out, I would then want to structure the application's data structures and classes following the "Model View Controller" paradigm. An example architecture is shown below.
 
 ### Model
-The Model classes are responsible for downloading data from the Twitter API, storing tweets, account and organization data, and persisting the data using Core Data.  There is a CoreDataStackManager class for all Core Data operations and also an ImageCache class for caching any images downloaded.
+The Model classes are responsible for downloading data from the Twitter API, storing tweets, account and organization data, and persisting the data using CoreData.  There is a CoreDataStackManager class for all CoreData operations and also an ImageCache class for caching any images downloaded.
 
 | Class                 |  Inherits From |
 |-----------------------|----------------|
@@ -73,18 +73,18 @@ Although the above list is not completely exhaustive, it outlines a great start 
 ### __Questions 4__:
 This is a great question.  Developers often forget to think about one of the most crucial aspects of building great software: performance.  I am absolutely a performance oriented developer, so I will tell you a bit about how I would go about designing and testing my UITableView to display at least 60 FPS.
 
-Fist of all, Apple Engineers have put a lot of time and effort into creating a user interface library with fantastic performance.  Their method for dequeuing reusable cells is a fantastic approach.  The basic idea here is that instead of performing complex operations to create a new cell every time we need one, we simply recycle cells and other table compontnets when they are no longer in view, update the state of the view elements with new data and reuse it. 
+First of all, Apple Engineers have put a lot of time and effort into creating a user interface library with fantastic performance.  Their method for dequeuing reusable cells is a fantastic approach.  The basic idea here is that instead of performing complex operations to create a new cell every time we need one, we simply recycle cells and other table components when they are no longer in view, update the state of the view elements with new data and reuse it. 
 
 Apple's delegate pattern comes into focus here.  By utilizing the UITableViewDelegate and Datasource methods in an intelligent manner, we can harness the power and optimization that thousands of Apple employees have spent countless hours creating.  For example, instead of binding data to the entire table view, we use the tableView:willDisplayCell:forRowAtIndexPath method to compute changes to our the data in each cell.  
 
-We have to be smart when using these delegate and datasource methods, because the performance of the table view depends on them.  Although the reuse pattern is fantastic, it can be costly if you perform heavy calculations from within the delegate and datasource methods.  Complex data operations need to happen on background threads.  It is also best to keep the table view simple as far as the dimensions are concerned because the calculations for heightForRowAtIndexPath: and other related methods are done on each pass when new table view cells are created. 
+We have to be smart when using these delegate and datasource methods, because the performance of the table view depends on them.  Although the reuse pattern is fantastic, it can be costly if you perform heavy calculations from within the delegate and datasource methods.  Complex data operations need to happen on background threads.  It is also best to keep the tableview simple as far as the dimensions are concerned because the calculations for heightForRowAtIndexPath: and other related methods are done on each pass when new table view cells are created. 
 
-I would also want to use the least computationally expensive graphics operations when considering the view drawing life cycle for any custom views rendered within the table view cell.  This would mean avoiding heavy animations using Apple's Core Animation framework.  Instead, we can perform our view rendering with the CoreGraphics drawRect method.  The drawRect method is responsible for rendering custom static content via the CPU.  As I understand it, this frees up the GPU to handle the more complex operations that UIKit is performing for us.
+I would also want to use the least computationally expensive graphics operations when considering the view drawing life cycle for any custom views rendered within the tableview cell.  This would mean avoiding heavy animations using Apple's Core Animation framework.  Instead, we can perform our view rendering with the CoreGraphics drawRect method.  The drawRect method is responsible for rendering custom static content via the CPU.  As I understand it, this frees up the GPU to handle the more complex operations that UIKit is performing for us.
 
 To test that my theories are sound, I would use the Apple Instruments application to measure the speed at which our table view cells were rendering and I would tweak it until I got it above 60 FPS.
 
 ### __Question 5__:
-If I were given this project, I would consider a few seperate approaches.  If part of the requirement was to use NSUserDefaults, I would consider using the NSUserDefaults.sharedUserDefaults method because it is a singleton that automatically synchronizes the persisted data with the in memory properties.  That way, any time I need to use the data in a seperate view controller, I could access any of the persisted properties in any view by just accessing the NSUserDefaults.standardUserDefaults properties.
+If I were given this project, I would consider a few separate approaches.  If part of the requirement was to use NSUserDefaults, I would consider using the NSUserDefaults.sharedUserDefaults method because it is a singleton that automatically synchronizes the persisted data with the in memory properties.  That way, any time I need to use the data in a separate view controller, I could access any of the persisted properties in any view by just accessing the NSUserDefaults.standardUserDefaults properties.
 
 That said, I would probably suggest a different approach. I would definitely refactor it because it does not follow the "Model View Controller" paradigm.  Why not create a seperate Model class for the Actor?  The class could be accessed through a singleton and the methods for reading and writing the data to NSUserDefaults could happen within the singleton.
 
@@ -153,3 +153,5 @@ Before answering the final question, insert a job description for an iOS develop
 Your answer for Question 7 should be targeted to the company/job-description you chose.
 
 Question 7 - If you were to start your iOS developer position today, what would be your goals a year from now?
+
+
