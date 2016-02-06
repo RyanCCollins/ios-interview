@@ -17,10 +17,10 @@ What I do like about CoreData is how powerful it is.  I like it because it has a
 I really like the Realm persistence framework because it was built specifically for the mobile platform.  You can run your persistence model classes on multiple threads without fear of bad access or data corruption (and the obscure CoreData bugs that only NSZombies will help you to track down.)  I plan to use both frameworks when appropriate, but am very interested in using Realm for smaller applications.
 
 ### __Question 3__
-I believe that the first step to writing good software is to break down the requirements and specifications in a highly detailed manner.  Once the specifications are mapped out, I would then want to structure the application's data structs and classes following the **Model View Controller** paradigm. An example architecture is shown below.
+I believe that the first step to writing good software is to break down the requirements and specifications in a highly detailed manner.  Once the specifications are mapped out, I would structure the application's data structs and classes following the *Model View Controller* paradigm. An example architecture is shown below.
 
 ### Model
-The Model classes are responsible for downloading data from the Twitter API, storing tweets, account and organization data, and persisting the data using CoreData.  There is a CoreDataStackManager class for all CoreData operations and also an ImageCache class for caching any images downloaded.
+The Model classes are responsible for downloading data from the Twitter API, storing tweets, account and organization data, and persisting the data using CoreData.  There is a `CoreDataStackManager` class for all CoreData operations and also an `ImageCache` class for caching any images downloaded.
 
 | Class                 |  Inherits From |
 |-----------------------|----------------|
@@ -32,9 +32,9 @@ The Model classes are responsible for downloading data from the Twitter API, sto
 | CoreDataStackManager  | N/A            |
 
 ### View
-For custom views, there is a custom table view cell for showing the detail of each tweet in the feed.  To customize the UI, there is a **like** button for liking a tweet, a Twitter login button and custom views for the settings and login views. There are also other various custom UI elements, such as the action buttons within each tweet cell in the feed.
+For custom views, there is a custom table view cell for showing the detail of each tweet in the feed.  To customize the UI, there is a *Like* button for liking a tweet, a Twitter login button and custom views for the settings and login views. There are also other various custom UI elements, such as the action buttons within each tweet cell in the feed.
 
-|  Class       | Parent Class   |
+|  Class       | Inherits From  |
 |--------------|----------------|
 | LikeButton   | UIButton       |
 | TweetTableViewCell | UITableViewCell |
@@ -45,7 +45,7 @@ For custom views, there is a custom table view cell for showing the detail of ea
 ### Controller
 The controller classes are responsible for controlling the UI for the various components of the app. There is a tab view for navigating between scenes from the main view, a navigation controller for drilling down to the detail of a tweet, a detail view for showing a single tweet, and a view controller for the account and organization views.
 
-| Class                      | Parent Class          |
+| Class                      | Inherits From         |
 |----------------------------|-----------------------|
 | AccountViewController      | UIViewController      |
 | TweetViewController        | UIViewController      |
@@ -60,7 +60,7 @@ The controller classes are responsible for controlling the UI for the various co
 | SettingsViewController     | UIViewController      |
 
 ### Other
-There are also other custom classes, such as the TransitionDelegate, PhotoAnimator, and others, which will help to build a cohesive custom UI with beautiful transition animations.
+There are also other custom classes, such as the `TransitionDelegate`, `PhotoAnimator`, and others, which will help to build a cohesive custom UI with beautiful transition animations.
 
 
 |    Class                 | Parent Class                          |
@@ -75,18 +75,18 @@ This is a great question.  Developers often forget to think about one of the mos
 
 First of all, Apple Engineers have put a lot of time and effort into creating a user interface library with fantastic performance.  Their method for dequeuing reusable cells is a fantastic approach.  The basic idea here is that instead of performing complex operations to create a new cell every time we need one, we simply recycle cells and other table components when they are no longer in view, update the state of the view elements with new data and reuse it. 
 
-Apple's delegate pattern comes into focus here.  By utilizing the UITableViewDelegate and Datasource methods in an intelligent manner, we can harness the power and optimization that thousands of Apple employees have spent countless hours creating.  For example, instead of binding data to the entire table view, we use the tableView:willDisplayCell:forRowAtIndexPath method to compute changes to our the data in each cell.  
+Apple's delegate pattern comes into focus here.  By utilizing the `UITableViewDelegate/Datasource` methods in an intelligent manner, we can harness the power and optimization that thousands of Apple employees have spent countless hours creating.  For example, instead of binding data to the entire table view, we use the `tableView:willDisplayCell:forRowAtIndexPath` method to compute changes to our the data in each cell.  
 
-We have to be smart when using these delegate and datasource methods, because the performance of the table view depends on them.  Although the reuse pattern is fantastic, it can be costly if you perform heavy calculations from within the delegate and datasource methods.  Complex data operations need to happen on background threads.  It is also best to keep the tableview simple as far as the dimensions are concerned because the calculations for heightForRowAtIndexPath: and other related methods are done on each pass when new table view cells are created. 
+We have to be smart when using these delegate and datasource methods, because the performance of the table view depends on them.  Although the reuse pattern is fantastic, it can be costly if you perform heavy calculations from within the delegate and datasource methods.  Complex data operations need to happen on background threads.  It is also best to keep the tableview simple as far as the dimensions are concerned because the calculations for `heightForRowAtIndexPath:` and other related methods are done on each pass when new table view cells are created. 
 
-I would also want to use the least computationally expensive graphics operations when considering the view drawing life cycle for any custom views rendered within the tableview cell.  This would mean avoiding heavy animations using Apple's Core Animation framework.  Instead, we can perform our view rendering with the CoreGraphics drawRect method.  The drawRect method is responsible for rendering custom static content via the CPU.  As I understand it, this frees up the GPU to handle the more complex operations that UIKit is performing for us.
+I would also want to use the least computationally expensive graphics operations when considering the view drawing life cycle for any custom views rendered within the tableview cell.  This would mean avoiding heavy animations using Apple's Core Animation framework.  Instead, we can perform our view rendering with the CoreGraphics `drawRect` method.  The `drawRect` method is responsible for rendering custom static content via the CPU.  As I understand it, this frees up the GPU to handle the more complex operations that UIKit is performing for us.
 
 To test that my theories are sound, I would use the Apple Instruments application to measure the speed at which our table view cells were rendering and I would tweak it until I got it above 60 FPS.
 
 ### __Question 5__:
-If I were given this project, I would consider a few separate approaches.  If part of the requirement was to use NSUserDefaults, I would consider using the NSUserDefaults.sharedUserDefaults method because it is a singleton that automatically synchronizes the persisted data with the in memory properties.  That way, any time I need to use the data in a separate view controller, I could access any of the persisted properties in any view by just accessing the NSUserDefaults.standardUserDefaults properties.
+If I were given this project, I would consider a few separate approaches.  If part of the requirement was to use NSUserDefaults, I would consider using the `NSUserDefaults.sharedUserDefaults` method because it is a singleton that automatically synchronizes the persisted data with the in memory properties.  That way, any time I need to use the data in a separate view controller, I could access any of the persisted properties in any view by just accessing the NSUserDefaults.standardUserDefaults properties.
 
-That said, I would probably suggest a different approach. I would definitely refactor it because it does not follow the "Model View Controller" paradigm.  Why not create a seperate Model class for the Actor?  The class could be accessed through a singleton and the methods for reading and writing the data to NSUserDefaults could happen within the singleton.
+That said, I would probably suggest a different approach. I would definitely refactor it because it does not follow the *Model View Controller* paradigm.  Why not create a seperate model class for the *Actor*?  The class could be accessed through a singleton and the methods for reading and writing the data to NSUserDefaults could happen within the singleton.
 
 Below is a bit of psuedocode for how this could be done.
 
@@ -124,9 +124,9 @@ Actor.sharedInstance().saveActor(actorBio: ...)
 __Question 6__:
 If someone I was working with gave me a file for a ViewController that contained code for fetching and storing data from a network to the local device, I would likely recommend that they take the Udacity iOS Developer Nanodegree and I would help them to understand what they could do to improve their code.
 
-For starters, I would refactor the code into separate classes.  I would create a Model class for storing the data to a persistent store.  I would also create a separate GithubAPI model class that handled the network requests and data parsing.  By the time I was done, the code would be very well abstracted to abide by the Model View Controller paradigm, making the code much more reusable, decoupled and easier to test and debug.
+For starters, I would refactor the code into separate classes.  I would create a model class for storing the data to a persistent store.  I would also create a separate `GithubAPI` model class that handled the network requests and data parsing.  By the time I was done, the code would be very well abstracted to abide by the *Model View Controller* paradigm, making the code much more reusable, decoupled and easier to test and debug.
 
-I created a bit of pseudocode that I saved in the GitHubProjectViewController.swift file.
+I created a bit of pseudocode that I saved in the `GitHubProjectViewController.swift` file.
 
 __Question 7__:
 If I were to start my iOS Developer position today, my goals a year from now would be to have an even better grasp on the Swift and Objective-C languages and the Apple Frameworks.  I plan to spend the rest of my life mastering software development and I believe that the education process is a lifelong pursuit.  I would constantly be reading and talking to other developers to learn their techniques to apply best practices to all of my work.
