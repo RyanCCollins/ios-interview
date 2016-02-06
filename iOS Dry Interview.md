@@ -127,25 +127,25 @@ actorNameLabel.text = Actor.sharedInstance().actorName
 Actor.sharedInstance().saveActor(actorBio: ...)
 ```
 
-__Question 6__:
+### __Question 6__:
 If someone I was working with gave me a file for a ViewController that contained code for fetching and storing data from a network to the local device, I would recommend that they take the Udacity iOS Developer Nanodegree and I would help them to understand what they could do to improve their code.
 
 For starters, I would refactor the code into separate classes.  I would create a model class for storing the data to a persistent store.  I would also create a separate `GithubAPI` model class that handled the network requests and data parsing.  By the time I was done, the code would be very well abstracted to abide by the *Model View Controller* paradigm, making the code much more reusable, decoupled and easier to test and debug.
 
 I created a bit of pseudocode that I saved in the `GitHubProjectViewController.swift` file to demonstrate this.
 
-__Question 7__:
+### __Question 7__:
 If I were to start my iOS Developer position today, my goals a year from now would be to have an even better grasp on the Swift and Objective-C languages and the Apple Frameworks.  I plan to spend the rest of my life mastering software development and I believe that the education process is a lifelong pursuit.  I would constantly be reading and talking to other developers to learn their techniques to apply best practices to all of my work.
 
 Also, my goal would be to have a library of all of the reusable components that I use for my development so that I would be even more efficient than I am now.  I would combine the best of my code, along with the best of the Apple frameworks into a reusable library that would grow with me.
 
 
-iOS Job Posting
+#### iOS Job Posting
 Although this is not just for an iOS Job, it is right up my alley as a Senior Backend Developer with iOS experience.
 
 Here is a [link to the posting](https://www.linkedin.com/jobs2/view/100462805?trkInfo=searchKeywordString%3AIos+Developer%2CsearchLocationString%3A%2C+Connecticut%2Cvertical%3Ajobs%2CpageNum%3A1%2Cposition%3A14%2CMSRPsearchId%3A453673677_1454734448332&recommendedFlavor=SCHOOL_RECRUIT&trk=jobs_jserp_job_listing_text).
 
-### Questions
+### Questions Asked
 Question 1 - What have you learned recently about iOS development? How did you learn it? Has it changed your approach to building apps?
 
 Question 2 - Can you talk about a framework that you've used recently (Apple or third-party)? What did you like/dislike about the framework?
