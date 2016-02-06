@@ -84,48 +84,107 @@ I would also want to use the least computationally expensive graphics operations
 To test that my theories are sound, I would use the Apple Instruments application to measure the speed at which our tableview cells were being rendered and I would tweak it until I got it above 60 FPS.
 
 ### __Question 5__
-The approach suggested in Question #5 makes sense and I will explain why. However, I will also suggest an alternative approach.  
+The approach suggested in Question #5 does not make sense to me and I will explain why. I will also suggest an alternative approach.  
 
-If part of the requirement is to use `NSUserDefaults`, I would consider using the `NSUserDefaults.sharedUserDefaults` method because it is a singleton that automatically synchronizes the persisted data with the in memory properties.  That way, any time I needed to use the data in a separate view controller, I could do so by accessing the `NSUserDefaults.standardUserDefaults` properties.
+NSUserDefaults is not a smart solution for saving data within an application because it is computationally slow and there are far better solutions for persisting data on the iOS mobile platform.
 
-The alternative that I would suggest would be to refactor the code because it does not follow the *Model View Controller* paradigm.  Why not create a seperate model class for the *Actor*?  The class could be accessed through a singleton and the methods for reading and writing the data to `NSUserDefaults` could happen within the singleton.  
-
-Going one step further, we could use CoreData instead of NSUserDefaults.  It would be a better idea to use CoreData in case the project was to grow and because storing image data to `NSUserDefaults` would be computationally slow.
+The alternative that I would suggest would be to refactor the code to use Core Data and also to follow the *Model View Controller* paradigm.  Why not create a seperate NSManagedObject model class for the *Actor*?  The class could be accessed through the the `fetchedResultsController` from within any ViewController and we could save data using the `managedObjectContext` singleton of the `CoreDataStackManager`.  
 
 Below is a bit of psuedocode showing how the singleton class would be structured.
 
 ```
-// Note: this shows NSUserDefaults because that is what the question suggests we use.
-// That said, I might take a different approach and use an NSManagedObject because NSUserDefaults is not meant to
-// Store much more than settings.  Storing an image can be done, but it is slow.  I included psuedocode for storing to 
-// NSUSerDefaults to fulfill the requirements asked in this question.
+// Our NSManagedObject Actor Class
+import CoreData
+import Foundation
+
 class Actor: NSObject {
-    var actorBio: String
-    var actorName: String
-    var actorImage: UIImage
-
-    /* We want to create a singleton of the Actor class available from Actor.sharedInstance() */
+    @NSManaged var bio: NSString
+    @NSManaged var name: NSString
+    @NSManaged var imageFile: NSString
     
-    class func sharedInstance() -> Actor {
-        struct singleton {
-            static var sharedInstance = Actor()
-        }
-        return singleton.sharedInstance
+    override init(entity: NSEntityDescription, insertIntoManagedObjectContext context: NSManagedObjectContext?) {
+        super.init(entity: entity, insertIntoManagedObjectContext: context)
     }
     
-    
-    func saveActor (actorBio: String, ...){
-	// Save our actor object to the NSUserDefaults.
-        // and set our properties to be accessed through the Singleton
+    struct Keys {
+        static let bio = "bio"
+        static let name = "name"
+        static let imageFile = "imageFile"
     }
-
+    
+    /* Custom initializer for CoreData */
+    init(dictionary: [String: AnyObject?], context: NSManagedObjectContext) {
+        
+        /* Get associated entity from our context */
+        let entity = NSEntityDescription.entityForName("Settings", inManagedObjectContext: context)!
+        
+        /* Super initializer */
+        super.init(entity: entity, insertIntoManagedObjectContext: context)
+        
+        /* Assign our properties */
+        bio = dictionary[Keys.bio] as! NSString
+        name = dictionary[Keys.name] as! NSString
+        imageFile = dictionary[Keys.imageFile] as! NSString
+        
+    }
+    
 }
 
-// Now we can access the properties via the 
-actorNameLabel.text = Actor.sharedInstance().actorName
+class CoreDataStackManager {
+    //Our standard core data stack manager methods.
+}
 
-// And save a new Actor like so
-Actor.sharedInstance().saveActor(actorBio: ...)
+import UIKit
+
+class ActorViewController {
+    
+    @IBOutlet weak var actorNameLabel: UILabel!
+    @IBOutlet weak var actorImageView: UIImageView!
+    @IBOutlet weak var actorBio: UITextView!
+    
+    var selectedActor: Actor
+    
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        let defaults = NSUserDefaults.standardUserDefaults()
+        
+        actorNameLabel.text = selectedActor.name
+
+        actorImageView.image = UIImage(named: selectedActor.imageName)
+
+        actorBio.text = selectedActor.bio
+    }
+    /* We can access our data with the managedObjectContext singleton */
+    var sharedContext: NSManagedObjectContext {
+        return CoreDataStackManager.sharedInstance().managedObjectContext
+    }
+    
+    /* We should use the fetchedResultsController to get our data in each ViewController */
+    lazy var fetchedResultsController: NSFetchedResultsController = {
+        
+        let fetchRequest = NSFetchRequest(entityName: "Actor")
+        fetchRequest.sortDescriptors = []
+        fetchRequest.predicate = NSPredicate(format: "name == %@", self.selectedActor)
+        
+        let fetchedResultsController = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: self.sharedContext, sectionNameKeyPath: nil, cacheName: nil)
+        
+        fetchedResultsController.delegate = self
+        
+        return fetchedResultsController
+    }()
+    
+    /* Perform our fetch with the fetched results controller */
+    func performFetch() {
+        
+        do {
+            
+            try self.fetchedResultsController.performFetch()
+            
+        } catch let error as NSError {
+            // Handle the error
+        }
+    }
+}
 ```
 
 ### __Question 6__:
@@ -136,18 +195,19 @@ For starters, I would refactor the code into separate classes.  I would create a
 I created a bit of pseudocode that I saved in the `GitHubProjectViewController.swift` file to demonstrate this.
 
 ### __Question 7__:
-If I were to start my iOS Developer position today, my goals a year from now would be to have an even better grasp on the Swift and Objective-C languages and the Apple Frameworks.  I plan to spend the rest of my life mastering software development and I believe that the education process is a lifelong pursuit.  I would constantly be reading and talking to other developers to learn their techniques to apply best practices to all of my work.
+I plan to spend the rest of my life mastering software development and I believe that the education process is a lifelong pursuit.  My goals one year from now will likely be the same as they are now.  I will continue to educate myself in new technology, learn new skills and best practices and apply those new skills to everything that I do.  Although it is not necesarilly my goal to work specifically as an iOS developer, I believe that the skills that I have learned during the iOS Developer Nanodegree are completely transferable to all of my work.
 
-Also, my goal would be to have a library of all of the reusable components that I use for my development so that I would be even more efficient than I am now.  I would combine the best of my code, along with the best of the Apple frameworks into a reusable library that would grow with me.
+I would like to work in a mid to senior level position with leadership roles at a company that is working on the bleeding edge of technology.  The reason that I wanted to focus on learning iOS Development was to improve the way that I build software and to improve the way that I communicate with my team.  Having a better understanding of how to build mobile applications makes me a very strong candidate for senior level software developer positions because it has given me a more well-rounded understanding of the software development process and also has helped me to learn best practices for creating software specifications and for performing expert reviews of software/code.  
 
+Not only that, but it has taught me best practices for creating software, working in a team and it has also taught me how to be a mentor.  I spend a lot of my time helping other people to learn how to work as part of a software team.  One of my extracarlicural activites is to organize a team of software developers to work together collaboratively to build software for non profit organizations.  We work together for the sake of solving problems and to gain experience.  An example of this is a project we are working on now that will be used by an organization that coordinates food donations in the city of Portland.
 
-#### iOS Job Posting
-Although this is not just for an iOS Job, it is right up my alley as a Senior Backend Developer with iOS experience.
+After finishing the iOS Developer Nanodegree, I now have an incredible understanding of the entire software development process.  I can take part in the process from every angle and can help the company I work for to drive their business decisions. In summation, I believe that I will continue to grow my knowledge for the rest of my life and I am very excited to take the next step forwards in my career.
 
-Here is a [link to the posting](https://www.linkedin.com/jobs2/view/100462805?trkInfo=searchKeywordString%3AIos+Developer%2CsearchLocationString%3A%2C+Connecticut%2Cvertical%3Ajobs%2CpageNum%3A1%2Cposition%3A14%2CMSRPsearchId%3A453673677_1454734448332&recommendedFlavor=SCHOOL_RECRUIT&trk=jobs_jserp_job_listing_text).
+#### Job Posting
+As I have stated, my goal is not specifically to work as an iOS Developer.  I consider myself to be a Fullstack Engineer, who happens to know how to program for the iOS platform.  For that reason, I am including job postings for jobs in the Fullstack category.
 
-Alternatively, I would consider applying for an [entry level job](https://jobs.lever.co/udacity/b99fa8fc-9da9-4541-a627-f92e17dbdcdb) at an amazing company like Udacity.
-
+As I stated, Udacity is one place that I would love to work.  I think that their vision is incredible and I am so excited by their work.
+[Here is a link to a job posting](https://jobs.lever.co/udacity/df7fbc8c-c7c9-4cb3-b1de-7d169521da15) that I may consider.
 ### Questions Asked
 Question 1 - What have you learned recently about iOS development? How did you learn it? Has it changed your approach to building apps?
 
