@@ -84,14 +84,18 @@ I would also want to use the least computationally expensive graphics operations
 To test that my theories are sound, I would use the Apple Instruments application to measure the speed at which our table view cells were being rendered and I would tweak it until I got it above 60 FPS.
 
 ### __Question 5__:
-If I were given this project, I would consider a few separate approaches.  If part of the requirement was to use `NSUserDefaults`, I would consider using the `NSUserDefaults.sharedUserDefaults` method because it is a singleton that automatically synchronizes the persisted data with the in memory properties.  That way, any time I need to use the data in a separate view controller, I could access any of the persisted properties in any view by just accessing the `NSUserDefaults.standardUserDefaults` properties.
+The approach suggested in Question #5 makes sense and I will explain why. However, I will also suggest an alternative approach.  
 
-That said, I would probably suggest a different approach. I would definitely refactor it because it does not follow the *Model View Controller* paradigm.  Why not create a seperate model class for the *Actor*?  The class could be accessed through a singleton and the methods for reading and writing the data to `NSUserDefaults` could happen within the singleton.
+If part of the requirement is to use `NSUserDefaults`, I would consider using the `NSUserDefaults.sharedUserDefaults` method because it is a singleton that automatically synchronizes the persisted data with the in memory properties.  That way, any time I needed to use the data in a separate view controller, I could do so by accessing the `NSUserDefaults.standardUserDefaults` properties.
 
-Below is a bit of psuedocode for how this could be done.
+The alternative that I would suggest would be to refactor the code because it does not follow the *Model View Controller* paradigm.  Why not create a seperate model class for the *Actor*?  The class could be accessed through a singleton and the methods for reading and writing the data to `NSUserDefaults` or, even better, `CoreData` could happen within the singleton.  Since this is a small project, perhaps the slower `NSUserDefaults` would make due. That said, I would suggest using CoreData in case the project were to grow and because storing image data to `NSUserDefaults` would be slow.
+
+Below is a bit of psuedocode showing how the singleton class would be structured.
 
 ```
-
+// Note: this shows NSUserDefaults because that is what the question suggests we use.
+// That said, I might take a different approach and use an NSManagedObject because NSUserDefaults is not meant to
+// Store much more than settings.  Storing an image can be done, but it is slow.  I included psuedocode for storing to //NSUSerDefaults because it was part of the question.
 class Actor: NSObject {
     var actorBio: String
     var actorName: String
