@@ -63,14 +63,14 @@ The controller classes are responsible for controlling the UI for the various co
 There are also other custom classes, such as the `TransitionDelegate`, `PhotoAnimator`, and others, which will help to build a cohesive custom UI with beautiful transition animations.
 
 
-|    Class                 | Parent Class                          |
+|    Class                 | Inherits From                         |
 |--------------------------|---------------------------------------|
 |TransitionDelegate        | UIViewControllerTransitioningDelegate |
 |PhotoPresentationAnimator | UIViewControllerAnimatedTransitioning |
 
 Although the above list is not completely exhaustive, it outlines a great start to building a fantastic Twitter app.
 
-### __Questions 4__:
+### __Questions 4__
 This is a great question.  Developers often forget to think about one of the most crucial aspects of building great software: performance.  I am absolutely a performance oriented developer, so I will tell you a bit about how I would go about designing and testing my UITableView to display at least 60 FPS.
 
 First of all, Apple Engineers have put a lot of time and effort into creating a user interface library with fantastic performance.  Their method for dequeuing reusable cells is a fantastic approach.  The basic idea here is that instead of performing complex operations to create a new cell every time we need one, we simply recycle cells and other table components when they are no longer in view, update the state of the view elements with new data and reuse it. 
@@ -83,7 +83,7 @@ I would also want to use the least computationally expensive graphics operations
 
 To test that my theories are sound, I would use the Apple Instruments application to measure the speed at which our table view cells were being rendered and I would tweak it until I got it above 60 FPS.
 
-### __Question 5__:
+### __Question 5__
 The approach suggested in Question #5 makes sense and I will explain why. However, I will also suggest an alternative approach.  
 
 If part of the requirement is to use `NSUserDefaults`, I would consider using the `NSUserDefaults.sharedUserDefaults` method because it is a singleton that automatically synchronizes the persisted data with the in memory properties.  That way, any time I needed to use the data in a separate view controller, I could do so by accessing the `NSUserDefaults.standardUserDefaults` properties.
