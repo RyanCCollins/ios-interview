@@ -86,9 +86,9 @@ To test that my theories are sound, I would use the Apple Instruments applicatio
 ### __Question 5__
 The approach suggested in Question #5 does not make sense to me and I will explain why.
 
-NSUserDefaults is not a smart solution for persisting any data other than settings for many reasons and there are far better solutions for persisting data on the iOS mobile platform.
+NSUserDefaults is not a smart solution for persisting any data other than user settings and there are far better solutions for persisting data on the iOS mobile platform.
 
-The alternative that I would suggest would be to refactor the code to use CoreData and also to follow the *Model View Controller* paradigm.  Why not create a separate NSManagedObject model class for the *Actor*?  The class could be accessed through the `fetchedResultsController` from within any ViewController and we could save data using the `managedObjectContext` singleton of the `CoreDataStackManager`.  
+The alternative that I would suggest would be to refactor the code to use CoreData and also to follow the *Model View Controller* paradigm.  I would recommend creating a separate NSManagedObject model class for the *Actor*.  The class could be accessed through the `fetchedResultsController` from within any ViewController and we could save data using one or more `managedObjectContexts` created in a  `CoreDataStackManager` class.  
 
 Below is a bit of pseudo-code showing how the model class would be structured.
 
