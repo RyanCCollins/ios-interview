@@ -195,16 +195,16 @@ For starters, I would refactor the code into separate classes.  I would create a
 I created a bit of pseudo-code that I saved in the `GitHubProjectViewController.swift` file to demonstrate this.
 
 ### __Question 7__:
-One year from now, I will have finished another two Nanodegrees, which will lead me to being a stronger software developer with a better understanding of the entire development process.  I would like to be in a leadership role that puts me in the position to be a mentor to other people aspiring to take part in the software development process.  I will use all of the new skills that I have learned and best practices to create exceptional products and drive business decisions for the company that I work for.
+One year from now, I will have finished another two Nanodegrees, which will lead me to being a stronger software developer with a better understanding of the entire development process. I would like to be in a leadership role that puts me in the position to be a mentor to other people aspiring to take part in the software development process. I will use all of the new skills that I have learned and best practices to create exceptional products and drive business decisions for the company that I work for.
 
-I will be continuing the extracuricular activities that I partake in now, including organizing a team of software developers to build software for non profit organizations and participating in competititive hackathon events.  I will also be contributing to building a codebase/framework for the company that I work for and for my own use.  I will be working on being as organized and efficient as possible with all of my work. 
+I will be continuing the extracurricular activities that I partake in now, including organizing a team of software developers to build software for non-profit organizations and participating in competitive hackathon events. I will also be contributing to building a codebase/framework for the company that I work for and for my own use. I will be working on being as organized and efficient as possible with all of my work.
 
-In summary, I will be continuing my professional and personal growth and using my newfound skills in all of my work.
+In summary, I will be continuing my professional and personal growth, using my newfound skills and applying the incredible passion that I have for all of the work that I do to my job.
 
 #### Job Posting
-As I have stated, my goal is not specifically to work as an iOS Developer.  I consider myself to be a Fullstack Engineer, who happens to know how to program for the iOS platform.  For that reason, I am including job postings for jobs in the Fullstack category.
+My goal is not specifically to work as an iOS Developer.  I consider myself to be a Fullstack engineer, who happens to know how to program for the iOS platform.  For that reason, I am including job postings for jobs in the Fullstack category.
 
-As I stated, Udacity is one place that I would love to work.  I think that their vision is incredible and I am so excited by their work.
+As I stated, Udacity is one place that I would love to work.  I think that their vision is incredible and I am so excited and passionate about their work.
 [Here is a link to a job posting](https://jobs.lever.co/udacity/df7fbc8c-c7c9-4cb3-b1de-7d169521da15) that I may consider.
 
 Here are the responsibilities laid out in the posting.
