@@ -198,6 +198,8 @@ One year from now, I will have finished another two Nanodegrees, which will lead
 
 I will be continuing the extracurricular activities that I partake in now, including organizing a team of software developers to build software for non-profit organizations and participating in competitive hackathon events. I will also be contributing to building a codebase/framework for the company that I work for and for my own use. I will be working on being as organized and efficient as possible with all of my work.
 
+It is obvious why the job that I am applying for will help me to reach my goals.  Udacity exemplifies all of the things that I am most passionate about and their mission is exactly along the lines of my own.  I feel that I could really grow with the company and that Udacity would help me to continue learning and growing.
+
 In summary, I will be continuing my professional and personal growth, using my newfound skills and applying the incredible passion that I have for all of the work that I do to my job.
 
 #### Job Posting
