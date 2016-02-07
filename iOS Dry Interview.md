@@ -198,9 +198,9 @@ One year from now, I will have finished another two Nanodegrees, which will lead
 
 I will be continuing the extracurricular activities that I partake in now, including organizing a team of software developers to build software for non-profit organizations and participating in competitive hackathon events. I will also be contributing to building a codebase/framework for the company that I work for and for my own use. I will be working on being as organized and efficient as possible with all of my work.
 
-It is obvious why the job that I am applying for will help me to reach my goals.  Udacity exemplifies all of the things that I am most passionate about and their mission is exactly along the lines of my own.  I feel that I could really grow with the company and that Udacity would help me to continue learning and growing.
+It is apparent that that the job I am applying for will help me to reach my goals.  The company exemplifies all of the things that I am most passionate about and their mission is exactly along the lines of my own.  After a year working at Udacity, I will still be learning from my colleagues and applying all of the skills I gain to helping others to learn.  Education is so incredibly important to me and I would really love to help other people to grow their skillsets, as Udacity has helped me to grow mine. I feel that working for Udacity would give me the tremendous opportunity to be a leader and a mentor to others.  I look forward to having the opportunity to create tools that will help Udacity in their mission of democratizing world-class education.
 
-In summary, I will be continuing my professional and personal growth, using my newfound skills and applying the incredible passion that I have for all of the work that I do to my job.
+In summary, I will be continuing my professional and personal growth, using my newfound skills and applying the incredible passion that I have for all of the work that I do in order to help other people to learn and grow.
 
 #### Job Posting
 My goal is not specifically to work as an iOS Developer.  I consider myself to be a Fullstack engineer, who happens to know how to program for the iOS platform.  For that reason, I am including job postings for jobs in the Fullstack category.
