@@ -146,7 +146,6 @@ class ActorViewController {
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
-        let defaults = NSUserDefaults.standardUserDefaults()
         
         actorNameLabel.text = selectedActor.name
 
