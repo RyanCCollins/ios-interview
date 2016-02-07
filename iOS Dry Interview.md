@@ -84,7 +84,7 @@ I would also want to use the least computationally expensive graphics operations
 To test that my theories are sound, I would use the Apple Instruments application to measure the speed at which our tableview cells were being rendered and I would tweak it until I got it above 60 FPS.
 
 ### __Question 5__
-The approach suggested in Question #5 does not make sense to me and I will explain why. I will also suggest an alternative approach.  
+The approach suggested in Question #5 does not make sense to me and I will explain why.
 
 NSUserDefaults is not a smart solution for persisting any data other than settings for many reasons and there are far better solutions for persisting data on the iOS mobile platform.
 
